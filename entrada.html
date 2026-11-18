@@ -1,0 +1,174 @@
+<!--============================================================================================ENTRADA==============================================================================================
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+==========================================================================
+  DISEÑO LATINOAMERICANO — entrada.html (documento de referencia)
+
+  PASO 1 · js/entradas.js + entrada.html
+  Plantilla única de ficha. Estilos: stylesheet.css, sección 10.
+  Datos: fichas/<slug>.json (generado por scripts/build-entradas.mjs).
+  ==========================================================================
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Institución de ejemplo 1 — Diseño Latinoamericano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div id="page" class="site">
+  <a class="skip-link" href="#content">Ir al contenido</a>
+
+  <!-- ====================================================================
+       CABECERA (igual en todas las páginas)
+       ==================================================================== -->
+  <header id="masthead" class="site-header">
+    <div class="header-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">DL</span>
+        <span class="logo-text">Diseño<br>Latinoamericano</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menú</button>
+
+      <nav id="site-navigation" class="main-navigation" aria-label="Menú principal">
+        <ul id="primary-menu" class="menu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item menu-item-has-children">
+            <a href="galeria.html">Archivo</a>
+            <button class="sub-menu-toggle" type="button" aria-expanded="false" aria-label="Alternar menú">▾</button>
+            <ul class="sub-menu">
+              <li class="menu-item"><a href="galeria.html">Galería</a></li>
+              <li class="menu-item"><a href="linea-de-tiempo.html">Línea de tiempo</a></li>
+              <li class="menu-item"><a href="mapa-interactivo.html">Mapa interactivo</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="manifiesto.html">Manifiesto</a></li>
+          <li class="menu-item"><a href="info.html">¿Quiénes somos?</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" role="search" action="index.html" method="get">
+        <label for="s">Buscar por:</label>
+        <input id="s" class="search-field" type="search" name="s">
+        <button class="search-submit" type="submit">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       ENTRADA: una sola plantilla para todas las fichas
+       La ficha se elige con ?slug=... y se lee de fichas/<slug>.json (la genera el build).
+       Acá se muestra la ficha "institucion-de-ejemplo-1".
+       ==================================================================== -->
+  <main id="content">
+    <article class="entry" data-slug="institucion-de-ejemplo-1">
+      <header class="entry-header">
+        <p class="entry-kicker">Chile · Mobiliario / Iluminación</p>
+        <h1>Institución de ejemplo 1</h1>
+        <p class="entry-meta">
+          <span>Autoría: Grupo A</span>
+          <span>Año: 1954</span>
+          <span>Tipo institucional: Gubernamental</span>
+          <span>Lugar: Santiago</span>
+        </p>
+      </header>
+
+      <figure class="entry-cover">
+        <img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="Rectángulo gris que representa una portada de ejemplo">
+        <figcaption>Pie de imagen de ejemplo.</figcaption>
+      </figure>
+
+      <!-- El cuerpo se guarda en Markdown; la página lo convierte a HTML -->
+      <div class="entry-content">
+        <p>Primer párrafo del texto de la ficha.</p>
+        <h2>Subtítulo de ejemplo</h2>
+        <p>Segundo párrafo del texto de la ficha.</p>
+        <blockquote><p>Cita destacada de ejemplo.</p></blockquote>
+      </div>
+
+      <footer class="entry-footer">
+        <ul class="entry-tags">
+          <li><a class="tag" href="galeria.html?etiqueta=ejemplo">ejemplo</a></li>
+          <li><a class="tag" href="galeria.html?categoria=mobiliario_iluminacion">Mobiliario / Iluminación</a></li>
+        </ul>
+        <!-- El texto y el destino cambian según desde dónde se llegó: galería, línea de tiempo o mapa -->
+        <a class="entry-back" href="galeria.html">← Volver a la galería</a>
+      </footer>
+    </article>
+
+    <!-- Criterio: mismo país, misma década o misma etiqueta -->
+    <section class="entry-related" aria-labelledby="relacionadas-titulo">
+      <h2 id="relacionadas-titulo">Entradas relacionadas</h2>
+      <div class="post-grid">
+        <article class="post-card" data-slug="institucion-de-ejemplo-6">
+          <a class="post-thumbnail" href="entrada.html?slug=institucion-de-ejemplo-6"><img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy"></a>
+          <h3 class="entry-title"><a href="entrada.html?slug=institucion-de-ejemplo-6">Institución de ejemplo 6</a></h3>
+          <p class="entry-author">Grupo F</p>
+        </article>
+        <article class="post-card" data-slug="institucion-de-ejemplo-2">
+          <a class="post-thumbnail" href="entrada.html?slug=institucion-de-ejemplo-2"><img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy"></a>
+          <h3 class="entry-title"><a href="entrada.html?slug=institucion-de-ejemplo-2">Institución de ejemplo 2</a></h3>
+          <p class="entry-author">Grupo B</p>
+        </article>
+        <article class="post-card" data-slug="institucion-de-ejemplo-3">
+          <a class="post-thumbnail" href="entrada.html?slug=institucion-de-ejemplo-3"><img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy"></a>
+          <h3 class="entry-title"><a href="entrada.html?slug=institucion-de-ejemplo-3">Institución de ejemplo 3</a></h3>
+          <p class="entry-author">Grupo C</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       PIE DE PÁGINA (igual en todas las páginas)
+       ==================================================================== -->
+  <footer id="colophon" class="site-footer">
+    <div class="footer-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Diseño Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Diseño<br>Latinoamericano</span>
+      </a>
+      <ul class="social-links">
+        <li><a href="https://www.instagram.com/modernismolatinoamericano/">Instagram</a></li>
+        <li><a href="https://x.com/modernismolat">X</a></li>
+        <li><a href="https://web.facebook.com/modernismolat">Facebook</a></li>
+      </ul>
+      <a class="back-to-top" href="#page">Scroll al inicio</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================================================================
+     SCRIPTS (todavía no escritos: esta página es la estructura)
+     js/entradas.js lo genera scripts/build-entradas.mjs: window.ENTRADAS y window.ENTRADAS_META.
+       <script src="js/entradas.js"></script>
+       <script src="js/entrada.js"></script>   lee ?slug=, carga fichas/<slug>.json, completa esta plantilla y arma "relacionadas"
+     ====================================================================== -->
+<script>
+  // Menú móvil, submenú "Archivo" y cierre con Escape
+  (function () {
+    var nav = document.getElementById('site-navigation');
+    var toggle = document.querySelector('.menu-toggle');
+    toggle.addEventListener('click', function () {
+      toggle.setAttribute('aria-expanded', nav.classList.toggle('is-open'));
+    });
+    document.querySelectorAll('.sub-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-expanded', btn.parentElement.classList.toggle('is-open'));
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.is-open').forEach(function (el) { el.classList.remove('is-open'); });
+    });
+  })();
+</script>
+</body>
+</html>

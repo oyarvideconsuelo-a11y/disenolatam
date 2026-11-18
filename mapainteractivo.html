@@ -1,0 +1,126 @@
+<!--========================================================================================MAPAINTERACTIVO===========================
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+  ==========================================================================
+  Diseño Latinoamericano — mapa-interactivo.html (documento de referencia)
+
+  PASO 4 · mapa-interactivo.html
+  Mapa con pines por país y tarjeta lateral. Estilos: stylesheet.css, sección 40.
+  Es la puerta de entrada del banner del home.
+  ==========================================================================
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa interactivo - Diseño Latinoamericano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div id="page" class="site">
+  <a class="skip-link" href="#content">Ir al contenido</a>
+
+  <!-- =================================CABECERA==================================================================== -->
+  
+  <header id="masthead" class="site-header">
+    <div class="header-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Diseño Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">DL</span>
+        <span class="logo-text">Diseño<br>Latinoamericano</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menú</button>
+
+      <nav id="site-navigation" class="main-navigation" aria-label="Menú principal">
+        <ul id="primary-menu" class="menu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item menu-item-has-children">
+            <a href="galeria.html">Archivo</a>
+            <button class="sub-menu-toggle" type="button" aria-expanded="false" aria-label="Alternar menú">▾</button>
+            <ul class="sub-menu">
+              <li class="menu-item"><a href="galeria.html">Galería</a></li>
+              <li class="menu-item"><a href="linea-de-tiempo.html">Línea de tiempo</a></li>
+              <li class="menu-item"><a href="mapa-interactivo.html" aria-current="page">Mapa interactivo</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="manifiesto.html">Manifiesto</a></li>
+          <li class="menu-item"><a href="info.html">¿Quiénes somos?</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" role="search" action="index.html" method="get">
+        <label for="s">Buscar por:</label>
+        <input id="s" class="search-field" type="search" name="s">
+        <button class="search-submit" type="submit">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       MAPA INTERACTIVO
+       Un pin por país. La posición sale de las coordenadas de data/paises.json:
+         left = (lng + 120) / 90 * 100      top = (35 - lat) / 93 * 100
+       (recuadro de América Latina, de lng -120 a -30 y de lat 35 a -58).
+       El fondo de .map-canvas debe ser un mapa con ese mismo recuadro.
+
+       Alternativa: embeber el mapa que el esquicio ya usa en Google My Maps
+       <iframe src="https://www.google.com/maps/d/embed?mid=1P1PX3zUvFttnEuF9uI9YXmtekLvF7zc" width="640" height="480" title="Mapa del esquicio"></iframe>
+       ==================================================================== -->
+  <main id="content" class="site-main">
+    <header class="page-header">
+      <h1>Mapa interactivo</h1>
+      <p class="page-lead">Elegí un país para ver sus fichas.</p>
+    </header>
+
+    <div class="map-layout">
+      <div class="map-canvas" role="group" aria-label="Mapa de fichas por país">
+        <button class="map-pin" type="button" style="left: 53.9%; top: 76.0%" aria-pressed="true" aria-label="Chile: 2 fichas" data-pais="CL"></button>
+        <button class="map-pin" type="button" style="left: 19.3%; top: 12.3%" aria-pressed="false" aria-label="México: 1 ficha" data-pais="MX"></button>
+        <button class="map-pin" type="button" style="left: 75.7%; top: 52.9%" aria-pressed="false" aria-label="Brasil: 1 ficha" data-pais="BR"></button>
+        <button class="map-pin" type="button" style="left: 51.0%; top: 32.7%" aria-pressed="false" aria-label="Colombia: 1 ficha" data-pais="CO"></button>
+        <button class="map-pin" type="button" style="left: 71.3%; top: 72.6%" aria-pressed="false" aria-label="Uruguay: 1 ficha" data-pais="UY"></button>
+      </div>
+
+      <aside class="map-card" aria-live="polite">
+        <h2>Chile</h2>
+        <p class="map-card-count">2 fichas</p>
+        <ul>
+          <li><a href="entrada.html?slug=institucion-de-ejemplo-1">Institución de ejemplo 1</a></li>
+          <li><a href="entrada.html?slug=institucion-de-ejemplo-6">Institución de ejemplo 6</a></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+
+<!-- ======================================================================
+     SCRIPTS (todavía no escritos: esta página es la estructura)
+     js/entradas.js lo genera scripts/build-entradas.mjs: window.ENTRADAS y window.ENTRADAS_META.
+       <script src="js/entradas.js"></script>
+       <script src="js/mapa.js"></script>   crea los pines, y al elegir uno completa .map-card con las fichas del país
+     ====================================================================== -->
+<script>
+  // Menú móvil, submenú "Archivo" y cierre con Escape
+  (function () {
+    var nav = document.getElementById('site-navigation');
+    var toggle = document.querySelector('.menu-toggle');
+    toggle.addEventListener('click', function () {
+      toggle.setAttribute('aria-expanded', nav.classList.toggle('is-open'));
+    });
+    document.querySelectorAll('.sub-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-expanded', btn.parentElement.classList.toggle('is-open'));
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.is-open').forEach(function (el) { el.classList.remove('is-open'); });
+    });
+  })();
+</script>
+</body>
+</html>

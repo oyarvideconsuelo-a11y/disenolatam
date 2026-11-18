@@ -1,0 +1,217 @@
+<!--=============================================INICIO==============================================================================================
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+  ==========================================================================
+  ORDEN DE ARMADO desde ingeniera inversa (primera versión)
+    1. js/entradas.js + entrada.html   fuente única de datos y plantilla de entrada
+    2. galeria.html                    galería con filtros
+    3. linea-de-tiempo.html            línea de tiempo
+    4. mapa-interactivo.html           mapa
+    5. manifiesto.html + info.html     páginas de texto
+
+  ESQUEMA DE js/entradas.js (cada entrada se define una sola vez)
+    slug · titulo · autores[] · publicado · anio · pais · lugar · lat · lng
+    categoria · etiquetas[] · portada { url, alt } · cuerpo · estado
+
+  BACKEND: pendiente a integrar, ya definido en plantilla de carga de datos. El esquema de arriba se ajusta cuando se integre.
+  ==========================================================================
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diseño Latinoamericano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div id="page" class="site">
+  <a class="skip-link" href="#content">Ir al contenido</a>
+
+  <!-- ====================================================================
+       CABECERA (se repite igual en todas las páginas)
+       ==================================================================== -->
+  <header id="masthead" class="site-header">
+    <div class="header-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Diseño Latinoameriano">
+
+        <span class="logo-mark" aria-hidden="true">DL</span>
+        <span class="logo-text">Diseño<br>Latinoamericano</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menú</button>
+
+      <nav id="site-navigation" class="main-navigation" aria-label="Menú principal">
+        <ul id="primary-menu" class="menu">
+          <li class="menu-item"><a href="index.html" aria-current="page">Inicio</a></li>
+          <li class="menu-item menu-item-has-children">
+            <a href="galeria.html">Archivo</a>
+            <button class="sub-menu-toggle" type="button" aria-expanded="false" aria-label="Alternar menú">▾</button>
+            <ul class="sub-menu">
+              <li class="menu-item"><a href="galeria.html">Galería</a></li>                          <!-- Paso 2 -->
+              <li class="menu-item"><a href="linea-de-tiempo.html">Línea de tiempo</a></li>          <!-- Paso 3 -->
+              <li class="menu-item"><a href="mapa-interactivo.html">Mapa interactivo</a></li>        <!-- Paso 4 -->
+            </ul>
+          </li>
+          <li class="menu-item"><a href="manifiesto.html">Manifiesto</a></li>                        <!-- Paso 5 -->
+          <li class="menu-item"><a href="info.html">¿Quiénes somos?</a></li>                         <!-- Paso 5 -->
+        </ul>
+      </nav>
+
+      <!-- En el home filtra la grilla con los datos de entradas.js (Paso 1) -->
+      <form class="search-form" role="search" action="index.html" method="get" data-filter-target="#post-grid">
+        <label for="s">Buscar por:</label>
+        <input id="s" class="search-field" type="search" name="s">
+        <button class="search-submit" type="submit">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       HOME: grilla de entradas
+       Cada tarjeta enlaza a la plantilla única entrada.html?slug=...   (Paso 1)
+       Los atributos data-pais, data-anio y data-etiquetas los completa
+       js/entradas.js; sirven de enganche para filtros y para las vistas
+       de galería, línea de tiempo y mapa (Pasos 2, 3 y 4).
+       ==================================================================== -->
+  <main id="content" class="site-main">
+    <section id="post-grid" class="post-grid" aria-label="Entradas recientes">
+
+      <article class="post-card" data-slug="este-es-el-romance-del-aniceto-y-la-francisca-de-como-quedo-trunco-comenzo-la-tristeza-y-unas-pocas-cosas-mas">
+        <a class="post-thumbnail" href="entrada.html?slug=este-es-el-romance-del-aniceto-y-la-francisca-de-como-quedo-trunco-comenzo-la-tristeza-y-unas-pocas-cosas-mas"><img src="img/portada-01.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=este-es-el-romance-del-aniceto-y-la-francisca-de-como-quedo-trunco-comenzo-la-tristeza-y-unas-pocas-cosas-mas">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+      <article class="post-card" data-slug="corporacion-de-fomento-de-la-produccion-corfo">
+        <a class="post-thumbnail" href="entrada.html?slug=corporacion-de-fomento-de-la-produccion-corfo"><img src="img/portada-02.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=corporacion-de-fomento-de-la-produccion-corfo">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+      <article class="post-card" data-slug="hacia-una-ciencia-de-la-liberacion-de-la-mujer">
+        <a class="post-thumbnail" href="entrada.html?slug=hacia-una-ciencia-de-la-liberacion-de-la-mujer"><img src="img/portada-03.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=hacia-una-ciencia-de-la-liberacion-de-la-mujer">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+      <article class="post-card" data-slug="industria-azucarera-nacional-s-a-iansa">
+        <a class="post-thumbnail" href="entrada.html?slug=industria-azucarera-nacional-s-a-iansa"><img src="img/portada-04.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=industria-azucarera-nacional-s-a-iansa">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+      <article class="post-card" data-slug="modelo-mundial-latinoamericano-mml">
+        <a class="post-thumbnail" href="entrada.html?slug=modelo-mundial-latinoamericano-mml"><img src="img/portada-05.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=modelo-mundial-latinoamericano-mml">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+      <article class="post-card" data-slug="mural-historia-de-la-farmacia-y-de-la-medicina-en-chile">
+        <a class="post-thumbnail" href="entrada.html?slug=mural-historia-de-la-farmacia-y-de-la-medicina-en-chile"><img src="img/portada-06.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=mural-historia-de-la-farmacia-y-de-la-medicina-en-chile">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+      <article class="post-card" data-slug="primer-congreso-de-la-cultura-negra-de-las-americas">
+        <a class="post-thumbnail" href="entrada.html?slug=primer-congreso-de-la-cultura-negra-de-las-americas"><img src="img/portada-07.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=primer-congreso-de-la-cultura-negra-de-las-americas">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+      <article class="post-card" data-slug="reforma-agraria-chilena">
+        <a class="post-thumbnail" href="entrada.html?slug=reforma-agraria-chilena"><img src="img/portada-08.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=reforma-agraria-chilena">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+      <article class="post-card" data-slug="invasion">
+        <a class="post-thumbnail" href="entrada.html?slug=invasion"><img src="img/portada-09.jpg" width="1024" height="648" alt="" loading="lazy"></a>
+        <h2 class="entry-title"><a href="entrada.html?slug=invasion">Lorem ipsum dolor sit amet, consectetur adipiscing elit…</a></h2>
+        <p class="entry-author">Quien diseña o enfoque historico o pais o industria o año</p>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- ====================================================================
+       NEWSLETTER
+       ==================================================================== -->
+  <section class="newsletter-banner">
+    <div class="banner-inner">
+      <form class="newsletter-form" action="#" method="post">
+        <h2 class="newsletter-title">suscríbete al newsletter</h2>
+        <div class="newsletter-fields">
+          <label class="screen-reader-text" for="email">Correo electrónico</label>
+          <input id="email" type="email" name="email" placeholder="Escribe tu correo electrónico…" required>
+          <button type="submit">Suscribirse</button>
+        </div>
+        <p class="newsletter-note">recibe actualizaciones y noticias directo a tu correo electrónico</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       BANNER DEL MAPA: puerta de entrada a mapa-interactivo.html   (Paso 4)
+       ==================================================================== -->
+  <section class="map-banner">
+    <div class="banner-inner">
+      <a class="map-link" href="mapa-interactivo.html" aria-label="Mapa interactivo">
+        <img class="map-img" src="img/mapa-imagen.jpeg" width="1024" height="1024" alt="Mapa interactivo" loading="lazy">
+      </a>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       PIE DE PÁGINA (se repite igual en todas las páginas)
+       ==================================================================== -->
+  <footer id="colophon" class="site-footer">
+    <div class="footer-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">DL</span>
+        <span class="logo-text">Diseño<br>Latinoamericano</span>
+      </a>
+      <ul class="social-links">
+        <li><a href="https://www.instagram.com/modernismolatinoamericano/">Instagram</a></li>
+        <li><a href="https://x.com/modernismolat">X</a></li>
+        <li><a href="https://web.facebook.com/modernismolat">Facebook</a></li>
+      </ul>
+      <a class="back-to-top" href="#page">Scroll al inicio</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================================================================
+     SCRIPTS
+     Paso 1: js/entradas.js define el array ENTRADAS (fuente única de datos).
+     Cada página lo carga y dibuja lo suyo.
+       <script src="js/entradas.js"></script>
+       <script src="js/main.js"></script>        menú, buscador del home
+       <script src="js/filtros.js"></script>     Paso 2 (galería)
+       <script src="js/timeline.js"></script>    Paso 3
+       <script src="js/mapa.js"></script>        Paso 4
+     ====================================================================== -->
+<script>
+  // Menú móvil, submenú "Archivo" y cierre con Escape
+  (function () {
+    var nav = document.getElementById('site-navigation');
+    var toggle = document.querySelector('.menu-toggle');
+    toggle.addEventListener('click', function () {
+      toggle.setAttribute('aria-expanded', nav.classList.toggle('is-open'));
+    });
+    document.querySelectorAll('.sub-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-expanded', btn.parentElement.classList.toggle('is-open'));
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.is-open').forEach(function (el) { el.classList.remove('is-open'); });
+    });
+  })();
+</script>
+</body>
+</html>

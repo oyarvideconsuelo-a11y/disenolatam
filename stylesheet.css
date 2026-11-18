@@ -1,0 +1,815 @@
+/* ==========================================================================
+   DiSEÑO LATINOAMERICANO — stylesheet.css (documento de referencia)
+
+   ORDEN DE ARMADO SUGERIDO (primera versión)
+     1. js/entradas.js + entrada.html   → sección 10  Entrada
+     2. galeria.html                    → sección 20  Galería y filtros
+     3. linea-de-tiempo.html            → sección 30  Línea de tiempo
+     4. mapa-interactivo.html           → sección 40  Mapa
+     5. manifiesto.html + info.html     → sección 50  Páginas de texto
+
+   ÍNDICE
+     00  Variables
+     01  Base
+     02  Componentes compartidos (header, menú, buscador, footer, banners)
+     03  Home: grilla de tarjetas (también se reutiliza en "relacionadas")
+     04  Cabecera de las páginas interiores (galería, línea de tiempo, mapa)
+     10  Paso 1 · Entrada
+     20  Paso 2 · Galería y filtros
+     30  Paso 3 · Línea de tiempo
+     40  Paso 4 · Mapa
+     50  Paso 5 · Páginas de texto
+     90  Accesibilidad y responsive
+
+   Los valores son una interpretación del sitio original (no se pudo leer su CSS).
+   Los nombres de clase de las secciones 10 a 50 son el contrato para las
+   páginas que todavía no existen.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   00 · VARIABLES
+   ========================================================================== */
+:root {
+  /* Color */
+  --bg: #ffffff;
+  --ink: #161514;
+  --muted: #66615c;
+  --line: #e5e1db;
+  --soft: #f3f0ea;
+  --rosa: #b8232a;        /* rojo institucional (fondos) */
+  --rosa-text: #b8232a;   /* rojo para texto sobre el fondo de la página */
+
+  /* Tipografía */
+  --f-display: 'Archivo', system-ui, sans-serif;
+  --f-body: 'IBM Plex Sans', system-ui, sans-serif;
+
+  /* Medidas */
+  --max-width: 1280px;
+  --measure: 70ch;       /* ancho de lectura para texto corrido */
+  --gutter: 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #191817;
+    --ink: #ece8e2;
+    --muted: #a29c94;
+    --line: #34312e;
+    --soft: #242220;
+    --red-text: #ff7a7f;
+    color-scheme: dark;
+  }
+}
+
+
+/* ==========================================================================
+   01 · BASE
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+.site { min-height: 100vh; }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 30;
+  padding: 6px 10px;
+  background: var(--ink);
+  color: var(--bg);
+}
+.skip-link:focus { left: 8px; }
+
+.screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* Contenedor centrado compartido por todas las páginas */
+.header-inner,
+.site-main,
+.banner-inner,
+.footer-inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+
+/* ==========================================================================
+   02 · COMPONENTES COMPARTIDOS
+   ========================================================================== */
+
+/* ---- Header ---- */
+.site-header { border-bottom: 1px solid var(--line); }
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  padding-block: 16px;
+}
+
+.custom-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--red-text);
+  text-decoration: none;
+  font: 800 14px/1.05 var(--f-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: var(--red);
+  color: #fff;
+  font: 800 13px var(--f-display);
+  letter-spacing: 0;
+}
+
+/* ---- Navegación principal ---- */
+.main-navigation { margin-left: auto; }
+
+.menu {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  display: block;
+  padding: 8px 12px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+.menu a:hover,
+.menu a:focus-visible,
+.menu a[aria-current="page"] { color: var(--red-text); }
+
+.menu-item { position: relative; }
+.menu-item-has-children { display: flex; align-items: center; }
+
+.sub-menu-toggle {
+  padding: 6px 8px 6px 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  min-width: 200px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+.menu-item-has-children:hover > .sub-menu,
+.menu-item-has-children:focus-within > .sub-menu,
+.menu-item-has-children.is-open > .sub-menu { display: block; }
+
+/* ---- Buscador ---- */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.search-form label { color: var(--muted); }
+
+.search-field {
+  width: 140px;
+  padding: 6px 2px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  color: inherit;
+  font: inherit;
+}
+
+.search-submit {
+  padding: 7px 12px;
+  background: var(--ink);
+  border: 0;
+  color: var(--bg);
+  font: 600 13px var(--f-body);
+  cursor: pointer;
+}
+
+/* ---- Botón de menú (solo móvil) ---- */
+.menu-toggle {
+  display: none;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: inherit;
+  font: 600 13px var(--f-body);
+  cursor: pointer;
+}
+
+/* ---- Newsletter ---- */
+.newsletter-banner {
+  background: var(--red);
+  color: #fff;
+}
+.newsletter-banner .banner-inner { padding-block: 40px; }
+
+.newsletter-form {
+  display: grid;
+  gap: 12px;
+  max-width: 520px;
+}
+
+.newsletter-title {
+  margin: 0;
+  font: 800 28px/1.1 var(--f-display);
+  text-transform: lowercase;
+  text-wrap: balance;
+}
+
+.newsletter-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.newsletter-fields input {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 10px 12px;
+  background: #fff;
+  border: 0;
+  color: #161514;
+  font: 14px var(--f-body);
+}
+.newsletter-fields button {
+  padding: 8px 16px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  font: 600 14px var(--f-body);
+  cursor: pointer;
+}
+.newsletter-fields button:hover {
+  background: #fff;
+  color: var(--red);
+}
+
+.newsletter-note { margin: 0; font-size: 13px; }
+
+/* ---- Banner del mapa (enlaza a la página del mapa) ---- */
+.map-banner .banner-inner { padding-block: 32px; }
+
+.map-link {
+  display: block;
+  width: min(100%, 360px);
+  aspect-ratio: 1;
+  color: inherit;
+  text-decoration: none;
+}
+
+.map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(var(--line) 1px, transparent 1.5px) 0 0 / 14px 14px,
+    var(--soft);
+}
+.map-link:hover .map-img { border-color: var(--red); }
+
+/* ---- Footer ---- */
+.site-footer { border-top: 1px solid var(--line); }
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  padding-block: 24px;
+}
+
+.social-links {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.social-links a { color: inherit; font-size: 13px; }
+
+.back-to-top {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---- Botones y etiquetas reutilizables (filtros, entrada, mapa) ---- */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--bg);
+  font: 600 14px var(--f-body);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: var(--red); border-color: var(--red); }
+
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+.tag:hover { border-color: var(--red); color: var(--red-text); }
+
+
+/* ==========================================================================
+   03 · HOME: GRILLA DE TARJETAS
+   También se reutiliza en "entradas relacionadas" (sección 10).
+   ========================================================================== */
+.site-main { padding-block: 32px; }
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 32px 24px;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.post-thumbnail {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1024 / 648;
+  background: repeating-linear-gradient(135deg, var(--soft) 0 10px, var(--line) 10px 11px);
+}
+.post-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.post-card:hover .post-thumbnail img { transform: scale(1.04); }
+
+.entry-title {
+  margin: 0;
+  font: 800 17px/1.25 var(--f-display);
+  text-wrap: balance;
+}
+.entry-title a { color: inherit; text-decoration: none; }
+.entry-title a:hover { color: var(--red-text); }
+
+.entry-author {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* El buscador del home oculta las tarjetas que no coinciden */
+.post-card[hidden] { display: none; }
+
+
+/* ==========================================================================
+   04 · CABECERA DE LAS PÁGINAS INTERIORES
+   header.page-header > h1 + p.page-lead   (galería, línea de tiempo, mapa)
+   ========================================================================== */
+.page-header { margin-bottom: 24px; }
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font: 800 clamp(28px, 5vw, 44px)/1.1 var(--f-display);
+  text-wrap: balance;
+}
+
+.page-lead {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--muted);
+}
+
+
+/* ==========================================================================
+   PASO 1 · ENTRADA  (entrada.html?slug=...)
+   Estructura prevista:
+   article.entry
+     header.entry-header   → .entry-kicker · h1 · .entry-meta
+     figure.entry-cover
+     div.entry-content     → texto corrido
+     footer.entry-footer   → .entry-tags · .entry-back
+   section.entry-related   → h2 + .post-grid (tarjetas de la sección 03)
+   ========================================================================== */
+.entry {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding: 32px var(--gutter);
+}
+
+.entry-header { max-width: var(--measure); margin-bottom: 24px; }
+
+.entry-kicker {
+  margin: 0 0 8px;
+  color: var(--red-text);
+  font: 600 12px var(--f-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.entry h1 {
+  margin: 0 0 12px;
+  font: 800 clamp(28px, 5vw, 44px)/1.1 var(--f-display);
+  text-wrap: balance;
+}
+
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.entry-cover { margin: 0 0 32px; }
+.entry-cover img { width: 100%; aspect-ratio: 1024 / 648; object-fit: cover; }
+.entry-cover figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; }
+
+.entry-content { max-width: var(--measure); }
+.entry-content p { margin: 0 0 1.1em; }
+.entry-content h2 { margin: 1.6em 0 0.5em; font: 800 24px/1.2 var(--f-display); }
+.entry-content blockquote {
+  margin: 1.5em 0;
+  padding-left: 16px;
+  border-left: 3px solid var(--red);
+  color: var(--muted);
+}
+
+.entry-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: var(--measure);
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.entry-tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.entry-back { color: var(--muted); font-size: 14px; }   /* "Volver a la galería / mapa / línea" */
+
+.entry-related {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding: 32px var(--gutter) 48px;
+  border-top: 1px solid var(--line);
+}
+.entry-related h2 { margin: 0 0 24px; font: 800 22px/1.2 var(--f-display); }
+
+
+/* ==========================================================================
+   PASO 2 · GALERÍA Y FILTROS  (galeria.html)
+   Estructura prevista:
+   form.filter-bar
+     .filter-group → legend + button.chip[aria-pressed]   (país, década, etiqueta)
+     .filter-status → conteo de resultados
+   ul.gallery-grid → li.gallery-item > a > img + figcaption
+   dialog.lightbox → imagen ampliada con navegación por teclado
+   ========================================================================== */
+.filter-bar {
+  display: grid;
+  gap: 16px;
+  padding: 16px 0 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.filter-group legend {
+  float: left;
+  min-width: 90px;
+  padding: 0;
+  color: var(--muted);
+  font: 600 12px var(--f-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chip {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: inherit;
+  font: 500 13px var(--f-body);
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--red); }
+.chip[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.filter-status { margin: 0; color: var(--muted); font-size: 13px; }
+
+.gallery-grid {
+  columns: 3 260px;
+  column-gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.gallery-item { break-inside: avoid; margin-bottom: 24px; }
+.gallery-item a { display: block; color: inherit; text-decoration: none; }
+.gallery-item img { width: 100%; background: var(--soft); }
+.gallery-item figcaption { margin-top: 6px; font-size: 13px; }
+.gallery-item[hidden] { display: none; }
+
+.lightbox {
+  width: min(92vw, 1100px);
+  max-height: 92vh;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  border: 0;
+}
+.lightbox::backdrop { background: rgba(0, 0, 0, 0.8); }
+.lightbox img { width: 100%; max-height: 78vh; object-fit: contain; }
+.lightbox-caption { padding: 12px 16px; font-size: 14px; }
+.lightbox-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px 10px;
+  background: var(--ink);
+  border: 0;
+  color: var(--bg);
+  cursor: pointer;
+}
+
+
+/* ==========================================================================
+   PASO 3 · LÍNEA DE TIEMPO  (linea-de-tiempo.html)
+   Estructura prevista:
+   div.timeline-layout
+     ol.timeline
+       li.timeline-decade → h2 + ul.timeline-items > li.timeline-item > button
+     aside.timeline-panel → resumen de la entrada elegida + enlace a entrada.html
+   ========================================================================== */
+.timeline-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+.timeline {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 32px;
+}
+.timeline::before {                      /* eje vertical */
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 2px;
+  background: var(--line);
+}
+
+.timeline-decade { margin-bottom: 32px; }
+.timeline-decade h2 {
+  margin: 0 0 12px;
+  font: 800 28px/1 var(--f-display);
+  color: var(--red-text);
+}
+
+.timeline-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+
+.timeline-item { position: relative; }
+.timeline-item::before {                 /* punto sobre el eje */
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 12px;
+  width: 10px;
+  height: 10px;
+  background: var(--bg);
+  border: 2px solid var(--red);
+  border-radius: 50%;
+}
+.timeline-item button {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: inherit;
+  font: 600 15px/1.3 var(--f-body);
+  text-align: left;
+  cursor: pointer;
+}
+.timeline-item button:hover { border-color: var(--line); }
+.timeline-item button[aria-expanded="true"] { background: var(--soft); border-color: var(--red); }
+.timeline-year { display: block; color: var(--muted); font: 500 12px var(--f-body); }
+
+.timeline-panel {
+  position: sticky;
+  top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+}
+.timeline-panel h3 { margin: 0 0 8px; font: 800 18px/1.25 var(--f-display); }
+.timeline-panel p { margin: 0 0 12px; font-size: 14px; }
+
+
+/* ==========================================================================
+   PASO 4 · MAPA  (mapa-interactivo.html)
+   Estructura prevista:
+   div.map-layout
+     div.map-canvas      → mapa; los pines son button.map-pin
+     aside.map-card      → entradas del lugar elegido, con enlace a entrada.html
+   ========================================================================== */
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.map-canvas {
+  position: relative;
+  min-height: 520px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(var(--line) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    var(--soft);
+  overflow: hidden;
+}
+
+.map-pin {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  background: var(--red);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);   /* se posiciona con left/top en % desde lat/lng */
+  cursor: pointer;
+}
+.map-pin:hover,
+.map-pin[aria-pressed="true"] { box-shadow: 0 0 0 6px rgba(184, 35, 42, 0.25); }
+
+.map-card {
+  position: sticky;
+  top: 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.map-card h2 { margin: 0 0 4px; font: 800 20px/1.2 var(--f-display); }
+.map-card-count { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+.map-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.map-card a { color: inherit; font-weight: 600; text-decoration: none; }
+.map-card a:hover { color: var(--red-text); }
+
+
+/* ==========================================================================
+   PASO 5 · PÁGINAS DE TEXTO  (manifiesto.html · info.html)
+   Estructura prevista:
+   main.site-main > article.prose-page > h1 + párrafos, h2, blockquote, listas
+   ========================================================================== */
+.prose-page {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-block: 24px 48px;
+}
+.prose-page h1 {
+  margin: 0 0 24px;
+  font: 800 clamp(30px, 5vw, 48px)/1.1 var(--f-display);
+  text-wrap: balance;
+}
+.prose-page h2 { margin: 1.8em 0 0.5em; font: 800 24px/1.2 var(--f-display); }
+.prose-page p { margin: 0 0 1.1em; }
+.prose-page blockquote {
+  margin: 1.5em 0;
+  padding-left: 16px;
+  border-left: 3px solid var(--red);
+  font-size: 1.1em;
+}
+.prose-page ul { padding-left: 1.2em; }
+.prose-page a { color: var(--red-text); }
+
+
+/* ==========================================================================
+   90 · ACCESIBILIDAD Y RESPONSIVE
+   ========================================================================== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--red-text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 980px) {
+  .timeline-layout,
+  .map-layout { grid-template-columns: minmax(0, 1fr); }
+  .timeline-panel,
+  .map-card { position: static; }
+  .map-canvas { min-height: 360px; }
+}
+
+@media (max-width: 700px) {
+  .menu-toggle { display: block; margin-left: auto; }
+
+  .main-navigation {
+    display: none;
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+  .main-navigation.is-open { display: block; }
+
+  .menu { flex-direction: column; }
+  .menu-item-has-children { flex-wrap: wrap; }
+
+  .sub-menu {
+    position: static;
+    width: 100%;
+    padding-left: 12px;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .search-form { order: 4; width: 100%; }
+  .search-field { flex: 1; }
+
+  .filter-group legend { float: none; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+
+/* Texto del logotipo (cabecera y pie) */
+.logo-text {
+  font: 800 13px/1.1 var(--f-display);
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}

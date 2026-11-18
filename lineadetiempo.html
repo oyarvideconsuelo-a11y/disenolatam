@@ -1,0 +1,199 @@
+<!--============================================================================================LINEA DE TIEMPO=====================
+===============================================================
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+  ==========================================================================
+  Diseño Latinoamericano — linea-de-tiempo.html (documento de referencia)
+
+  PASO 3 · linea-de-tiempo.html
+  Eje por décadas y panel lateral. Estilos: stylesheet.css, sección 30.
+  Las décadas salen de "año" en cada ficha.
+  ==========================================================================
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Línea de tiempo — Diseño Latinoamericano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div id="page" class="site">
+  <a class="skip-link" href="#content">Ir al contenido</a>
+
+  <!-- ====================================================================
+       CABECERA (igual en todas las páginas)
+       ==================================================================== -->
+  <header id="masthead" class="site-header">
+    <div class="header-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Modernismo<br>Latinoamericano</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menú</button>
+
+      <nav id="site-navigation" class="main-navigation" aria-label="Menú principal">
+        <ul id="primary-menu" class="menu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item menu-item-has-children">
+            <a href="galeria.html">Archivo</a>
+            <button class="sub-menu-toggle" type="button" aria-expanded="false" aria-label="Alternar menú">▾</button>
+            <ul class="sub-menu">
+              <li class="menu-item"><a href="galeria.html">Galería</a></li>
+              <li class="menu-item"><a href="linea-de-tiempo.html" aria-current="page">Línea de tiempo</a></li>
+              <li class="menu-item"><a href="mapa-interactivo.html">Mapa interactivo</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="manifiesto.html">Manifiesto</a></li>
+          <li class="menu-item"><a href="info.html">¿Quiénes somos?</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" role="search" action="index.html" method="get">
+        <label for="s">Buscar por:</label>
+        <input id="s" class="search-field" type="search" name="s">
+        <button class="search-submit" type="submit">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       LÍNEA DE TIEMPO
+       Una lista por década, desde 1950 (el esquicio relevó instituciones desde ese año).
+       Al elegir una ficha, el panel lateral muestra el resumen y el enlace a la ficha completa.
+       ==================================================================== -->
+  <main id="content" class="site-main">
+    <header class="page-header">
+      <h1>Línea de tiempo</h1>
+      <p class="page-lead">Las fichas ordenadas por década, desde 1950.</p>
+    </header>
+
+    <div class="timeline-layout">
+      <ol class="timeline" aria-label="Fichas por década">
+      <li class="timeline-decade">
+        <h2>1950s</h2>
+        <ul class="timeline-items">
+          <li class="timeline-item">
+            <button type="button" aria-expanded="true" aria-controls="timeline-panel" data-slug="institucion-de-ejemplo-1">
+              <span class="timeline-year">1954 · Chile</span>
+              Institución de ejemplo 1
+            </button>
+          </li>
+        </ul>
+      </li>
+      <li class="timeline-decade">
+        <h2>1960s</h2>
+        <ul class="timeline-items">
+          <li class="timeline-item">
+            <button type="button" aria-expanded="false" aria-controls="timeline-panel" data-slug="institucion-de-ejemplo-2">
+              <span class="timeline-year">1963 · México</span>
+              Institución de ejemplo 2
+            </button>
+          </li>
+        </ul>
+      </li>
+      <li class="timeline-decade">
+        <h2>1970s</h2>
+        <ul class="timeline-items">
+          <li class="timeline-item">
+            <button type="button" aria-expanded="false" aria-controls="timeline-panel" data-slug="institucion-de-ejemplo-3">
+              <span class="timeline-year">1971 · Brasil</span>
+              Institución de ejemplo 3
+            </button>
+          </li>
+        </ul>
+      </li>
+      <li class="timeline-decade">
+        <h2>1980s</h2>
+        <ul class="timeline-items">
+          <li class="timeline-item">
+            <button type="button" aria-expanded="false" aria-controls="timeline-panel" data-slug="institucion-de-ejemplo-4">
+              <span class="timeline-year">1988 · Colombia</span>
+              Institución de ejemplo 4
+            </button>
+          </li>
+        </ul>
+      </li>
+      <li class="timeline-decade">
+        <h2>1990s</h2>
+        <ul class="timeline-items">
+          <li class="timeline-item">
+            <button type="button" aria-expanded="false" aria-controls="timeline-panel" data-slug="institucion-de-ejemplo-5">
+              <span class="timeline-year">1995 · Uruguay</span>
+              Institución de ejemplo 5
+            </button>
+          </li>
+        </ul>
+      </li>
+      <li class="timeline-decade">
+        <h2>2000s</h2>
+        <ul class="timeline-items">
+          <li class="timeline-item">
+            <button type="button" aria-expanded="false" aria-controls="timeline-panel" data-slug="institucion-de-ejemplo-6">
+              <span class="timeline-year">2009 · Chile</span>
+              Institución de ejemplo 6
+            </button>
+          </li>
+        </ul>
+      </li>
+      </ol>
+
+      <aside class="timeline-panel" id="timeline-panel" aria-live="polite">
+        <h3>Institución de ejemplo 1</h3>
+        <p>Resumen de ejemplo de la ficha 1. Aparece en la línea de tiempo y en la tarjeta del mapa.</p>
+        <a class="btn" href="entrada.html?slug=institucion-de-ejemplo-1">Ver la ficha</a>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ====================================================================
+       PIE DE PÁGINA (igual en todas las páginas)
+       ==================================================================== -->
+  <footer id="colophon" class="site-footer">
+    <div class="footer-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Modernismo<br>Latinoamericano</span>
+      </a>
+      <ul class="social-links">
+        <li><a href="https://www.instagram.com/modernismolatinoamericano/">Instagram</a></li>
+        <li><a href="https://x.com/modernismolat">X</a></li>
+        <li><a href="https://web.facebook.com/modernismolat">Facebook</a></li>
+      </ul>
+      <a class="back-to-top" href="#page">Scroll al inicio</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================================================================
+     SCRIPTS (todavía no escritos: esta página es la estructura)
+     js/entradas.js lo genera scripts/build-entradas.mjs: window.ENTRADAS y window.ENTRADAS_META.
+       <script src="js/entradas.js"></script>
+       <script src="js/timeline.js"></script>   agrupa por década, arma la lista y completa .timeline-panel al elegir una ficha
+     ====================================================================== -->
+<script>
+  // Menú móvil, submenú "Archivo" y cierre con Escape
+  (function () {
+    var nav = document.getElementById('site-navigation');
+    var toggle = document.querySelector('.menu-toggle');
+    toggle.addEventListener('click', function () {
+      toggle.setAttribute('aria-expanded', nav.classList.toggle('is-open'));
+    });
+    document.querySelectorAll('.sub-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-expanded', btn.parentElement.classList.toggle('is-open'));
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.is-open').forEach(function (el) { el.classList.remove('is-open'); });
+    });
+  })();
+</script>
+</body>
+</html>

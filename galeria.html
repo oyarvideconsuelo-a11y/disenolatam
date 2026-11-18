@@ -1,0 +1,222 @@
+<!--============================================================================================GALERIA==============================================================================================
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+  ==========================================================================
+  DISEÑO LATINOAMERICANO — galeria.html (documento de referencia)
+
+  PASO 2 · galeria.html
+  Galería con filtros y lightbox. Estilos: stylesheet.css, sección 20.
+  Los filtros también se leen de la URL: galeria.html?pais=CL&decada=1950
+  ==========================================================================
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galería — Diseño Latinoamericano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div id="page" class="site">
+  <a class="skip-link" href="#content">Ir al contenido</a>
+
+  <!-- ====================================================================
+       CABECERA (igual en todas las páginas)
+       ==================================================================== -->
+  <header id="masthead" class="site-header">
+    <div class="header-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Modernismo<br>Latinoamericano</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menú</button>
+
+      <nav id="site-navigation" class="main-navigation" aria-label="Menú principal">
+        <ul id="primary-menu" class="menu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item menu-item-has-children">
+            <a href="galeria.html">Archivo</a>
+            <button class="sub-menu-toggle" type="button" aria-expanded="false" aria-label="Alternar menú">▾</button>
+            <ul class="sub-menu">
+              <li class="menu-item"><a href="galeria.html" aria-current="page">Galería</a></li>
+              <li class="menu-item"><a href="linea-de-tiempo.html">Línea de tiempo</a></li>
+              <li class="menu-item"><a href="mapa-interactivo.html">Mapa interactivo</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="manifiesto.html">Manifiesto</a></li>
+          <li class="menu-item"><a href="info.html">¿Quiénes somos?</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" role="search" action="index.html" method="get">
+        <label for="s">Buscar por:</label>
+        <input id="s" class="search-field" type="search" name="s">
+        <button class="search-submit" type="submit">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       GALERÍA CON FILTROS
+       Los botones de filtro se generan desde ENTRADAS_META.conteo: solo aparecen
+       los países, décadas, categorías y tipos que tienen fichas.
+       Categorías posibles: mobiliario_iluminacion, electronicos_linea_blanca, envases, movilidad_transporte, industria_pesada, utensilios_cocina, climatizacion.
+       Cada .gallery-item lleva data-* para filtrar sin volver a pedir datos.
+       ==================================================================== -->
+  <main id="content" class="site-main">
+    <header class="page-header">
+      <h1>Galería</h1>
+      <p class="page-lead">Explorá las fichas por país, década, categoría de producto y tipo institucional.</p>
+    </header>
+
+    <form class="filter-bar" aria-label="Filtros de la galería">
+      <fieldset class="filter-group">
+        <legend>País</legend>
+        <button class="chip" type="button" aria-pressed="true" data-filtro="pais" data-valor="">Todos</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="pais" data-valor="BR">Brasil</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="pais" data-valor="CL">Chile</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="pais" data-valor="CO">Colombia</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="pais" data-valor="MX">México</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="pais" data-valor="UY">Uruguay</button>
+      </fieldset>
+      <fieldset class="filter-group">
+        <legend>Década</legend>
+        <button class="chip" type="button" aria-pressed="true" data-filtro="decada" data-valor="">Todas</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="decada" data-valor="1950">1950s</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="decada" data-valor="1960">1960s</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="decada" data-valor="1970">1970s</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="decada" data-valor="1980">1980s</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="decada" data-valor="1990">1990s</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="decada" data-valor="2000">2000s</button>
+      </fieldset>
+      <fieldset class="filter-group">
+        <legend>Categoría</legend>
+        <button class="chip" type="button" aria-pressed="true" data-filtro="categoria" data-valor="">Todas</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="categoria" data-valor="mobiliario_iluminacion">Mobiliario / Iluminación</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="categoria" data-valor="electronicos_linea_blanca">Electrónicos / Electrodomésticos / Línea blanca</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="categoria" data-valor="envases">Envases</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="categoria" data-valor="movilidad_transporte">Movilidad / transporte</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="categoria" data-valor="industria_pesada">Industria pesada</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="categoria" data-valor="utensilios_cocina">Utensilios / Vajilla / Elementos de cocina</button>
+      </fieldset>
+      <fieldset class="filter-group">
+        <legend>Tipo</legend>
+        <button class="chip" type="button" aria-pressed="true" data-filtro="tipo" data-valor="">Todos</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="tipo" data-valor="gubernamental">Gubernamental</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="tipo" data-valor="privada_comercial">Privada / Comercial</button>
+        <button class="chip" type="button" aria-pressed="false" data-filtro="tipo" data-valor="tercer_sector">Tercer sector</button>
+      </fieldset>
+      <p class="filter-status" role="status" aria-live="polite">Mostrando 6 de 6 fichas</p>
+    </form>
+
+    <ul class="gallery-grid">
+      <li class="gallery-item" data-slug="institucion-de-ejemplo-1" data-pais="CL" data-decada="1950" data-categoria="mobiliario_iluminacion" data-tipo="gubernamental">
+        <a href="entrada.html?slug=institucion-de-ejemplo-1">
+          <figure>
+            <img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy">
+            <figcaption>Institución de ejemplo 1 · Chile, 1954</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="gallery-item" data-slug="institucion-de-ejemplo-2" data-pais="MX" data-decada="1960" data-categoria="electronicos_linea_blanca" data-tipo="privada_comercial">
+        <a href="entrada.html?slug=institucion-de-ejemplo-2">
+          <figure>
+            <img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy">
+            <figcaption>Institución de ejemplo 2 · México, 1963</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="gallery-item" data-slug="institucion-de-ejemplo-3" data-pais="BR" data-decada="1970" data-categoria="movilidad_transporte" data-tipo="tercer_sector">
+        <a href="entrada.html?slug=institucion-de-ejemplo-3">
+          <figure>
+            <img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy">
+            <figcaption>Institución de ejemplo 3 · Brasil, 1971</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="gallery-item" data-slug="institucion-de-ejemplo-4" data-pais="CO" data-decada="1980" data-categoria="envases" data-tipo="gubernamental">
+        <a href="entrada.html?slug=institucion-de-ejemplo-4">
+          <figure>
+            <img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy">
+            <figcaption>Institución de ejemplo 4 · Colombia, 1988</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="gallery-item" data-slug="institucion-de-ejemplo-5" data-pais="UY" data-decada="1990" data-categoria="industria_pesada" data-tipo="privada_comercial">
+        <a href="entrada.html?slug=institucion-de-ejemplo-5">
+          <figure>
+            <img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy">
+            <figcaption>Institución de ejemplo 5 · Uruguay, 1995</figcaption>
+          </figure>
+        </a>
+      </li>
+      <li class="gallery-item" data-slug="institucion-de-ejemplo-6" data-pais="CL" data-decada="2000" data-categoria="utensilios_cocina" data-tipo="tercer_sector">
+        <a href="entrada.html?slug=institucion-de-ejemplo-6">
+          <figure>
+            <img src="img/uploads/ejemplo-portada.svg" width="1024" height="648" alt="" loading="lazy">
+            <figcaption>Institución de ejemplo 6 · Chile, 2009</figcaption>
+          </figure>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Imagen ampliada: se abre con showModal() y se cierra con Escape -->
+    <dialog class="lightbox" aria-labelledby="lightbox-titulo">
+      <button class="lightbox-close" type="button" aria-label="Cerrar">✕</button>
+      <img src="" alt="">
+      <p class="lightbox-caption" id="lightbox-titulo"></p>
+    </dialog>
+  </main>
+
+  <!-- ====================================================================
+       PIE DE PÁGINA (igual en todas las páginas)
+       ==================================================================== -->
+  <footer id="colophon" class="site-footer">
+    <div class="footer-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Modernismo<br>Latinoamericano</span>
+      </a>
+      <ul class="social-links">
+        <li><a href="https://www.instagram.com/modernismolatinoamericano/">Instagram</a></li>
+        <li><a href="https://x.com/modernismolat">X</a></li>
+        <li><a href="https://web.facebook.com/modernismolat">Facebook</a></li>
+      </ul>
+      <a class="back-to-top" href="#page">Scroll al inicio</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ======================================================================
+     SCRIPTS (todavía no escritos: esta página es la estructura)
+     js/entradas.js lo genera scripts/build-entradas.mjs: window.ENTRADAS y window.ENTRADAS_META.
+       <script src="js/entradas.js"></script>
+       <script src="js/filtros.js"></script>   arma los botones, filtra .gallery-item, actualiza .filter-status y el lightbox
+     ====================================================================== -->
+<script>
+  // Menú móvil, submenú "Archivo" y cierre con Escape
+  (function () {
+    var nav = document.getElementById('site-navigation');
+    var toggle = document.querySelector('.menu-toggle');
+    toggle.addEventListener('click', function () {
+      toggle.setAttribute('aria-expanded', nav.classList.toggle('is-open'));
+    });
+    document.querySelectorAll('.sub-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-expanded', btn.parentElement.classList.toggle('is-open'));
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.is-open').forEach(function (el) { el.classList.remove('is-open'); });
+    });
+  })();
+</script>
+</body>
+</html>

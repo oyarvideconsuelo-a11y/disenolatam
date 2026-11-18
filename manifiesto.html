@@ -1,0 +1,273 @@
+<!--============================================================================================MANIFIESTO=============================================================================================
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+  ==========================================================================
+  MODERNISMO LATINOAMERICANO — manifiesto.html (documento de referencia)
+
+  PASO 5 · manifiesto.html
+  Página de texto. Estilos: stylesheet.css, sección 50.
+  ==========================================================================
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manifiesto — Modernismo Latinoamericano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div id="page" class="site">
+  <a class="skip-link" href="#content">Ir al contenido</a>
+
+  <!-- ====================================================================
+       CABECERA (igual en todas las páginas)
+       ==================================================================== -->
+  <header id="masthead" class="site-header">
+    <div class="header-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Modernismo<br>Latinoamericano</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menú</button>
+
+      <nav id="site-navigation" class="main-navigation" aria-label="Menú principal">
+        <ul id="primary-menu" class="menu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item menu-item-has-children">
+            <a href="galeria.html">Archivo</a>
+            <button class="sub-menu-toggle" type="button" aria-expanded="false" aria-label="Alternar menú">▾</button>
+            <ul class="sub-menu">
+              <li class="menu-item"><a href="galeria.html">Galería</a></li>
+              <li class="menu-item"><a href="linea-de-tiempo.html">Línea de tiempo</a></li>
+              <li class="menu-item"><a href="mapa-interactivo.html">Mapa interactivo</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="manifiesto.html" aria-current="page">Manifiesto</a></li>
+          <li class="menu-item"><a href="info.html">¿Quiénes somos?</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" role="search" action="index.html" method="get">
+        <label for="s">Buscar por:</label>
+        <input id="s" class="search-field" type="search" name="s">
+        <button class="search-submit" type="submit">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       MANIFIESTO
+       El texto lo redacta el equipo. La estructura admite h2, párrafos,
+       citas (blockquote) y listas.
+       Frase del esquicio que podría abrirlo: "Hacer y pensar como región autónoma y particular."
+       ==================================================================== -->
+  <main id="content" class="site-main">
+    <article class="prose-page">
+      <h1>Manifiesto</h1>
+      <p>[Párrafo de apertura del manifiesto.]</p>
+
+      <h2>[Primer apartado]</h2>
+      <p>[Texto del apartado.]</p>
+
+      <blockquote><p>[Frase destacada, opcional.]</p></blockquote>
+
+      <h2>[Segundo apartado]</h2>
+      <p>[Texto del apartado.]</p>
+    </article>
+  </main>
+
+  <!-- ====================================================================
+       PIE DE PÁGINA (igual en todas las páginas)
+       ==================================================================== -->
+  <footer id="colophon" class="site-footer">
+    <div class="footer-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Modernismo<br>Latinoamericano</span>
+      </a>
+      <ul class="social-links">
+        <li><a href="https://www.instagram.com/modernismolatinoamericano/">Instagram</a></li>
+        <li><a href="https://x.com/modernismolat">X</a></li>
+        <li><a href="https://web.facebook.com/modernismolat">Facebook</a></li>
+      </ul>
+      <a class="back-to-top" href="#page">Scroll al inicio</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Menú móvil, submenú "Archivo" y cierre con Escape
+  (function () {
+    var nav = document.getElementById('site-navigation');
+    var toggle = document.querySelector('.menu-toggle');
+    toggle.addEventListener('click', function () {
+      toggle.setAttribute('aria-expanded', nav.classList.toggle('is-open'));
+    });
+    document.querySelectorAll('.sub-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-expanded', btn.parentElement.classList.toggle('is-open'));
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.is-open').forEach(function (el) { el.classList.remove('is-open'); });
+    });
+  })();
+</script>
+</body>
+</html>
+
+---- INFO ----
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!--
+  ==========================================================================
+  MODERNISMO LATINOAMERICANO — info.html (documento de referencia)
+
+  PASO 5 · info.html
+  Página de texto. Estilos: stylesheet.css, sección 50.
+  ==========================================================================
+  -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Quiénes somos? — Modernismo Latinoamericano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=IBM+Plex+Sans:wght@400;600&display=swap">
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div id="page" class="site">
+  <a class="skip-link" href="#content">Ir al contenido</a>
+
+  <!-- ====================================================================
+       CABECERA (igual en todas las páginas)
+       ==================================================================== -->
+  <header id="masthead" class="site-header">
+    <div class="header-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Modernismo<br>Latinoamericano</span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu">Menú</button>
+
+      <nav id="site-navigation" class="main-navigation" aria-label="Menú principal">
+        <ul id="primary-menu" class="menu">
+          <li class="menu-item"><a href="index.html">Inicio</a></li>
+          <li class="menu-item menu-item-has-children">
+            <a href="galeria.html">Archivo</a>
+            <button class="sub-menu-toggle" type="button" aria-expanded="false" aria-label="Alternar menú">▾</button>
+            <ul class="sub-menu">
+              <li class="menu-item"><a href="galeria.html">Galería</a></li>
+              <li class="menu-item"><a href="linea-de-tiempo.html">Línea de tiempo</a></li>
+              <li class="menu-item"><a href="mapa-interactivo.html">Mapa interactivo</a></li>
+            </ul>
+          </li>
+          <li class="menu-item"><a href="manifiesto.html">Manifiesto</a></li>
+          <li class="menu-item"><a href="info.html" aria-current="page">¿Quiénes somos?</a></li>
+        </ul>
+      </nav>
+
+      <form class="search-form" role="search" action="index.html" method="get">
+        <label for="s">Buscar por:</label>
+        <input id="s" class="search-field" type="search" name="s">
+        <button class="search-submit" type="submit">Buscar</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       ¿QUIÉNES SOMOS?
+       Los párrafos de presentación y de método salen de la descripción del proyecto y del
+       esquicio colaborativo. Los datos del equipo van entre corchetes: completarlos.
+       ==================================================================== -->
+  <main id="content" class="site-main">
+    <article class="prose-page">
+      <h1>¿Quiénes somos?</h1>
+      <p>Este sitio es parte de un proyecto de investigación de cátedra. Busca visibilizar las diferentes industrias relevantes por país en Latinoamérica mediante la puesta en mapa histórico, social, cultural y político de productos industriales existentes.</p>
+
+      <h2>Cómo se construye</h2>
+      <p>El trabajo es colaborativo: estudiantes y docentes relevan, país por país, instituciones educativas y cámaras empresarias o sectoriales desde 1950. Entran también los colegios profesionales, las asociaciones de estímulo de la actividad profesional, los organismos estatales de estímulo y gestión del diseño y las organizaciones que orientan la comercialización.</p>
+
+      <h2>Categorías de producto</h2>
+      <ul>
+        <li>Mobiliario / Iluminación</li>
+        <li>Electrónicos / Electrodomésticos / Línea blanca</li>
+        <li>Envases</li>
+        <li>Movilidad / transporte</li>
+        <li>Industria pesada</li>
+        <li>Utensilios / Vajilla / Elementos de cocina</li>
+        <li>Climatización</li>
+      </ul>
+
+      <h2>Países relevados</h2>
+      <!-- Según el esquicio 2026: actualizar cuando se sumen países -->
+      <ul>
+        <li>México</li>
+        <li>El Salvador</li>
+        <li>Brasil</li>
+        <li>Paraguay</li>
+        <li>Colombia</li>
+        <li>Chile</li>
+        <li>Venezuela</li>
+        <li>Uruguay</li>
+        <li>Cuba</li>
+        <li>Perú</li>
+        <li>Ecuador</li>
+        <li>Bolivia</li>
+      </ul>
+
+      <h2>Equipo</h2>
+      <p>[Nombre de la cátedra y de la facultad]</p>
+      <p>[Docentes a cargo]</p>
+      <p>[Estudiantes colaboradores]</p>
+      <p>[Contacto]</p>
+    </article>
+  </main>
+
+  <!-- ================================================================       PIE DE PÁGINA (igual en todas las páginas)
+       ================================================================ -->
+  <footer id="colophon" class="site-footer">
+    <div class="footer-inner">
+      <a class="custom-logo-link" href="index.html" aria-label="Modernismo Latinoamericano">
+        <span class="logo-mark" aria-hidden="true">ML</span>
+        <span class="logo-text">Modernismo<br>Latinoamericano</span>
+      </a>
+      <ul class="social-links">
+        <li><a href="https://www.instagram.com/modernismolatinoamericano/">Instagram</a></li>
+        <li><a href="https://x.com/modernismolat">X</a></li>
+        <li><a href="https://web.facebook.com/modernismolat">Facebook</a></li>
+      </ul>
+      <a class="back-to-top" href="#page">Scroll al inicio</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Menú móvil, submenú "Archivo" y cierre con Escape
+  (function () {
+    var nav = document.getElementById('site-navigation');
+    var toggle = document.querySelector('.menu-toggle');
+    toggle.addEventListener('click', function () {
+      toggle.setAttribute('aria-expanded', nav.classList.toggle('is-open'));
+    });
+    document.querySelectorAll('.sub-menu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-expanded', btn.parentElement.classList.toggle('is-open'));
+      });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.is-open').forEach(function (el) { el.classList.remove('is-open'); });
+    });
+  })();
+</script>
+</body>
+</html>
